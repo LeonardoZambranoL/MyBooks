@@ -1,0 +1,36 @@
+{% extends "base.html"%}
+
+{% block css %}
+  <link rel="stylesheet" href="{{url_for('static', filename='css/reader.css')}}"/>
+{% endblock %}
+
+{% block title %} READ BOOK {% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block content_out_of_container %}
+  <center>
+    <div id="adobe-dc-view" class="book_displayer"></div>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("adobe_dc_view_sdk.ready", function(){
+            var adobeDCView = new AdobeDC.View({clientId: "{{client_id}}", divId: "adobe-dc-view"});
+            adobeDCView.previewFile({
+                content:{location: {url: "{{ url_for('views.get_book', bookId = book.id) }}"}},
+                metaData:{fileName: "{{ book.name }}"}
+            }, {defaultViewMode: "FIT_WIDTH"});
+        });
+    </script>
+
+    <div class="footer">
+      <div class="resize_arrow">
+        <h4> resizable  <i class="fas fa-long-arrow-alt-up"></i></h4>
+      </div>
+    </div>
+  </center>
+{% endblock %}
+
+{% block script_block %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/colap.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}"/>
+{% endblock %}
+
+{% block title %}
+    Sign Up !
+{% endblock %}
+
+{% block content %}
+    <br>
+    <h2 align="center">Sign Up!</h2>
+    <div class="bg_filter">
+        <hr class="form_hr">
+        <form method="post">
+            <div class="form-group">
+                <h5><label for="email">Email address</label></h5>
+                <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com" required>
+            </div>
+
+            <div class="form-group">
+                <h5><label for="user_name">User Name (at least 5 characters long)</label></h5>
+                <input type="text" class="form-control" id="user_name" name="user_name" placeholder="preferred username" required>
+            </div>
+
+            <div class="form-group">
+                <h5><label for="password">Password (at least 7 characters long)</label></h5>
+                <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+            </div>
+
+            <div class="form-group">
+                <h5><label for="passRep">Repeat Password</label></h5>
+                <input type="password" class="form-control" id="passRep" name="passRep" placeholder="repeat password" required>
+            </div>
+
+            <br>
+
+            <button type="submit" class = "btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+{% endblock %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% block script_block %}
+
+{% endblock %}

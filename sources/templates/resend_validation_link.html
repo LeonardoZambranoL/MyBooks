@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Resend link
+{% endblock %}
+
+{% block content %}
+    <br>
+    <center>
+        <h1>UNUSED!</h1>
+    </center>
+    <h2 align="center">Enter your email</h2>
+    <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
+    <form method="post">
+        <div class="form-group">
+            <label for="email"><h5>Email</h5></label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Resend link</button>
+    </form>
+{% endblock %}
+
+{% block script_block %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/colap.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,38 @@
+span.notif_counter{
+    float: right;
+    color: #ee1111;
+}
+
+div.notif_width_porc{
+    width: 70%;
+}
+
+div.book_cover_page{
+    text-align: center;
+}
+
+div.book_cover_page > div.card-img{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+div.book_info_container{
+    height: 295px;
+    overflow: hidden;
+}
+div.book_name{
+    height: 50px;
+    overflow: auto;
+}
+div.notif_text{
+    overflow-wrap: break-word;
+    word-break: break-all;
+    height: 195px;
+    overflow: auto;
+    white-space: pre-line;
+}
+
+div.notif_buttons{
+
+}

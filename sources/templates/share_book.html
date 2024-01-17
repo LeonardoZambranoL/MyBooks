@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/colap.css')}}"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/notification.css')}}"/>
+{% endblock %}
+
+{% block title %} Share book {% endblock %}
+
+{% block content %}
+
+    <br>
+    <h1 align="center"> WORK IN PROGRESS </h1>
+    <br>
+
+    <h5 class="collapsible">Share a book</h5>
+    <div class="bg_filter hidden">
+        <form enctype="multipart/form-data"  method="post">
+            <br>
+            <select class="form-control" id="bookToShare" name="bookToShare">
+                <option selected value=-1>Choose a book</option>
+                {% for book in user.books %}
+                    <option value={{book.id}}>{{ book.name }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <h5><label class="form-label" for="receiverType">Do you want to share this book with a person or with a group?</label></h5>
+            <select class="form-control" id="receiverType" name="receiverType">
+                <option selected value=-1>Choose one of the below listed</option>
+                <option value=0>Person</option>
+                <option value=1>Group</option>
+            </select>
+
+            <div class="form-group hidden" id="personSelector" >
+                <br>
+                <h5><label class="form-label" for="userName">Enter the user name of the Person</label></h5>
+                <input type="text" class="form-control" id="userName" name="userName">
+            </div>
+
+            <div class="form-group hidden" id="groupSelector">
+                <br>
+                <h5><label class="form-label" for="WIP">Choose the group to share the book to</label></h5>
+                <h4 id="WIP">WORK IN PROGRESS</h4>
+
+            </div>
+
+            <div class="hidden" id="shareBookSubmit">
+                <button type="submit" class = "btn btn-primary">Share!</button>
+            </div>
+
+        </form>
+        <hr>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <h5 class="collapsible">
+        Books shared to me
+        {% if user.bookShareNotifications | length > 0%}
+            <span class="notif_counter" id="shared_books_notif_counter">{{ user.bookShareNotifications | length }}</span>
+        {% endif %}
+    </h5>
+    <div class="bg_filter hidden">
+        <center>
+        <br>
+        {% for notification in user.bookShareNotifications %}
+            <div class="card notif_width_porc" id="notif_{{notification.id}}">
+                <div class="row">
+                    <div class="col-md-4 book_cover_page">
+                        <div class="card-img">
+                            <img src="{{ url_for('views.get_cover_page', bookType = 1, bookId= notification.bookId, supplementaryId = notification.id) }}" class="img-fluid img-thumbnail">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body book_info_container">
+                            <div class="book_name">
+                                <h5 class="card-title">{{ books_info[notification.id]['name'] }}</h5>
+                            </div>
+                            <hr style="padding: 0px; margin: 0px; ">
+                            <div class="notif_text">
+                                <p  class="card-text" id="{{notification.bookId}}" >{{ books_info[notification.id]['description'] }}</p>
+                            </div>
+                            <hr style="padding: 0px; margin: 0px; ">
+                            <p class="card-text">Shared by: {{ books_info[notification.id]['sender'] }}</p>
+                        </div>
+                        <div class="notif_buttons full_width">
+                            <button class="btn btn-primary" onClick="accept_decline_shared_book( {{notification.id}}, 1, 'notif_{{notification.id}}' )">Accept</button>
+                            <button class="btn btn-danger" onClick="accept_decline_shared_book( {{notification.id}}, 0, 'notif_{{notification.id}}' )">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        </center>
+        <hr>
+    </div>
+
+{% endblock %}
+
+{% block script_block %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/colap.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/social.js') }}"></script>
+{% endblock %}

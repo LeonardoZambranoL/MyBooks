@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ url_for('static', filename='LOGO.png') }}"/>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}"/>
+    {% block css %}
+
+    {% endblock %}
+
+    <script src="https://kit.fontawesome.com/16db8019da.js" crossorigin="anonymous"></script>
+
+    <title> {% block title %} {% endblock %} </title>
+
+</head>
+<body background="{{ url_for('static', filename='bg.png')}}">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('views.home') }}">
+            <img src="{{ url_for('static', filename='LOGO.png') }} " width="30" height="30"/>
+            My books
+        </a>
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" id="home" href="/">Home</a>
+              {% if user.is_authenticated %}
+                <a class="nav-item nav-link" id="upload_book" href="{{ url_for('views.upload_book') }}">Upload</a>
+                <a class="nav-item nav-link" id="friends" href="https://www.latercera.com/resizer/1U5DpgY3UfJ9Q6M3Uzqeg_Ib_58=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/FBEMQ3CXYJA33DUHUH2NTG23LM.jpg">Friends</a>
+                <a class="nav-item nav-link" id="share_book" href="{{ url_for('social.share_book') }}">Share</a>
+                <a class="nav-item nav-link" id="customize" href="{{ url_for('views.customize') }}">Customize</a>
+                <a class="nav-item nav-link" id="logout" href="{{ url_for('auth.logout') }}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" id="sign_up" href="{{ url_for('auth.sign_up') }}">Sign Up</a>
+                <a class="nav-item nav-link" id="login" href="{{ url_for('auth.login') }}">Login</a>
+              {% endif %}
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    {% with messages = get_flashed_messages(with_categories = true) %}
+        {% for category, message in messages %}
+
+            {% if category == "error" %}
+
+                <div class="alert alert-danger alert-dismissable fade show" role="alert" >
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true" >&times;</span>
+                    </button>
+                </div>
+
+            {% elif category == "success" %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+            {% elif category == "info" %}
+                <div class="alert alert-info alter-dismissable fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+            {%endif%}
+
+        {% endfor %}
+    {% endwith %}
+
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+        {% block content_out_of_container %}
+        {% endblock %}
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% block script_block %}
+    {% endblock %}
+
+</body>
+</html>

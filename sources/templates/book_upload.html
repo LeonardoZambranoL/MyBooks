@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}"/>
+{% endblock %}
+
+{% block title %} {{user.userName}}'s books {% endblock %}
+
+{% block content %}
+
+
+    <br>
+    <br>
+    <h1 align="center">Book Upload</h1>
+    <div>
+        <div class="bg_filter">
+            <hr class="form_hr">
+            <form enctype="multipart/form-data"  method="post" >
+                <div class="form-group rem_width_20">
+                    <h5><label class="form-label" for="book">Choose a file</label></h5>
+                    <input type="file" id="book" name="book" accept="application/pdf" required/>
+                </div>
+
+                <div class="form-group">
+                    <h5><label class="form-label" for="name">Enter book name (No special characters)</label></h5>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="How to save the book" maxlength="150" required/>
+                </div>
+
+                <div class="form-group">
+                <h5><label class="form-label" for="description">Enter a description (Optional, no special characters)</label></h5>
+                <textarea name="description" id="description" class="form-control" maxlength ="500"></textarea>
+                </div>
+
+                <div align="center">
+                    <button type="submit" class="btn btn-primary">
+                        Add new book!
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script_block %}
+
+{% endblock %}

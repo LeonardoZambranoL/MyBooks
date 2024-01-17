@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/book_card.css')}}"/>
+{% endblock %}
+
+{% block title %} {{user.userName}}'s books {% endblock %}
+
+{% block content %}
+    <br>
+    <h1 align="center">{{user.userName}}'s Books</h1>
+    <br>
+
+    <!-- OB -->
+    {% for book in user.books %}
+        <div id="book_{{book.id}}" class="card">
+
+            <div class="row full_width">
+
+                <div class="col-md-3 book_cover_page">
+                    <div class="card-img full_width">
+                        <img src= "{{ url_for('views.get_cover_page', bookType = 0,bookId = book.id, supplementaryId='#') }}" class="img-fluid img-thumbnail" >
+                    </div>
+                </div>
+
+                <div class="col-md-9 card-body" >
+                    <div class="book_info_container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="book_name in_line">
+                                    <h5 class = "book_name card-title" id="book_name_{{book.id}}">
+                                        {{ book.name }}
+                                    </h5>
+                                </div>
+
+                                <div class="owned_book_status">
+                                    {% if book.shared %}
+                                        <div class="owned_book_status_shared_by_me">
+                                            SHARED BY ME <i class="fas fa-share-alt"></i>
+                                        </div>
+                                    {% else %}
+                                        <div class="owned_book_status_owned">
+                                            UPLOADED BY ME <i class="fas fa-save"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 book_description">
+                                <p id ="book_description_{{book.id}}">{{book.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row book_functions">
+                        <div class="col-12">
+                            <div>
+                                <div id="download_share_read_buttons_{{book.id}}" class="in_line">
+                                    <a href= "{{ url_for('functions.download_book', bookId = book.id )}}" class="btn btn-primary">
+                                        <i class="fas fa-file-download"></i>
+                                        Download
+                                    </a>
+
+                                    <a  href = " {{ url_for('social.share_book') }} " class="btn btn-primary">
+                                        <i class="far fa-share-square"></i>
+                                        Share
+                                    </a>
+
+                                    <a href= "{{ url_for('views.read_book', bookId = book.id )}}" class="btn btn-primary">
+                                        <i class="fas fa-book"></i>
+                                        Read
+                                    </a>
+                                </div>
+
+                                <div class="in_line">
+
+                                    <div id="save_cancel_buttons_{{book.id}}" class="hidden">
+                                        <button onClick="saveBookEdit( {{book.id}} )" class="btn btn-success">
+                                            <i class="far fa-save"></i>
+                                            Save
+                                        </button>
+
+                                        <button onClick="cancelBookEdit( {{book.id}} )" class="btn btn-danger">
+                                            <i class="far fa-times-circle"></i>
+                                            Cancel
+                                        </button>
+                                    </div>
+
+                                    <div id="edit_delete_buttons_{{book.id}}" class="in_line">
+                                        <button onClick="editBookInfo( {{book.id}} )" class="btn btn-secondary">
+                                            <i class="far fa-edit"></i>
+                                            Edit
+                                        </button>
+                                        <button class="btn btn-danger"  onClick=" deleteItem( 'book', {{book.id}},'book_{{book.id}}') ">
+                                            <i class="fas fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+
+    <!-- SB -->
+    <!---
+
+    <div class="owned_book_status_shared_to_me">
+        SHARED TO ME <i class="fas fa-hands"></i>
+    </div>
+    --->
+
+
+
+    <div>
+        <ul class="list-group list-group-flush rounded_border_10">
+
+            <li class="list-group-item">
+                <p>
+                    A book marked as <strong>"SHARED TO ME"</strong> was shared to you by someone else and is subject to any
+                    changes dealt over it by the person who shared the book with you, including being deleted.
+                </p>
+            </li>
+
+            <li class="list-group-item">
+                <p>
+                    Deleting books marked as <strong>"SHARED TO ME"</strong> will only delete them from you books' list, they will
+                    however remain accessible to whom uploaded them and to all of the people to which
+                    these books were shared to.
+                </p>
+            </li>
+
+            <li class="list-group-item">
+                <p>
+                    Books marked as <strong>"UPLOADED BY ME"</strong> or <strong>"SHARED BY ME"</strong> were uploaded by you. You can
+                    share, update, and delete these books. You can also change the tittle and description of these
+                    books.
+                </p>
+            </li>
+
+            <li class="list-group-item">
+                <p>
+                    All changes you deal over a book marked as <b>"SHARED BY ME"</b> will affect the people with which
+                    you shared such book. If you delete a book marked as <b>"SHARED BY ME"</b>, all of the people with
+                    which you shared this book will no longer be able to access it.
+                </p>
+            </li>
+
+            <li class="list-group-item">
+                <p>
+                    You can only share books you uploaded, you can only update books you uploaded and you can only
+                    edit the tittle and description of books you uploaded.
+                </p>
+            </li>
+
+        </ul>
+    </div>
+    <br>
+{% endblock %}
+
+{% block script_block %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pers_home.js') }}"></script>
+{% endblock %}

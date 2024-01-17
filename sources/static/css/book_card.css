@@ -1,0 +1,64 @@
+div.book_name{
+    overflow-wrap: break-word;
+    word-break: break-all;
+    max-height: 85px;
+    overflow: auto;
+}
+
+div.book_description{
+    overflow-wrap: break-word;
+    word-break: break-all;
+    max-height: 185px;
+    overflow: auto;
+    white-space: pre-line;
+}
+
+div.book_cover_page{
+    text-align: center;
+}
+
+div.book_cover_page > div.card-img{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+div.book_functions{
+
+}
+
+div.book_functions > div.col-12{
+
+}
+
+div.book_info_container{
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+
+h5.book_name{
+
+}
+
+div.owned_book_status{
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+}
+div.owned_book_status > div.owned_book_status_owned{
+    color: #50cc50;
+}
+
+div.owned_book_status > div.owned_book_status_shared_to_me{
+    color: #d4a537;
+}
+
+
+div.owned_book_status > div.owned_book_status_shared_by_me{
+    color: #a950cc;
+}
+
+.rounded_border_10{
+    border-radius: 10px;
+}

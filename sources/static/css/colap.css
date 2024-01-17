@@ -1,0 +1,8 @@
+.collapsible {
+  background-color: #292b2c;
+  color: #f7f7f7;
+  cursor: pointer;
+  padding: 18px;
+  border: none;
+  border-radius: 10px;
+}

@@ -1,0 +1,16 @@
+div.book_displayer{
+    resize:vertical;
+    overflow: auto;
+    height: 595px;
+    width: 90%;
+}
+
+div.footer{
+    height: 25px;
+    width: 90%;
+    left:5%;
+}
+
+div.resize_arrow{
+    float: right;
+}

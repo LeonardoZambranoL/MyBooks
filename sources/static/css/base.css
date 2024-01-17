@@ -1,0 +1,19 @@
+div.hidden{
+    display: none;
+}
+div.in_line{
+    display: inline-block;
+}
+
+div.absolute_pos{
+    position:absolute
+}
+
+.full_width{
+    width: 100%
+}
+
+div.bg_filter{
+    padding: 0px 25px 25px 25px;
+    backdrop-filter: contrast(50%) blur(1px);
+}

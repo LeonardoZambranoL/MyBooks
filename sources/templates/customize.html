@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/colap.css')}}"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}"/>
+{% endblock %}
+
+{% block title %} Customize {% endblock %}
+
+{% block content %}
+    <br>
+    <h1 align="center"> WORK IN PROGRESS </h1>
+    <br>
+    <h5 class="collapsible">Background</h5>
+    <div class="hidden bg_filter">
+        <hr class="form_hr">
+        <form enctype="multipart/form-data"  method="post">
+            <h5><label class="form-label" for="bgType"> What do you want to use as a Background?</label></h5>
+            <select class="form-control" id="bgType" name="bgType">
+                <option selected value=-1>Choose one of the below listed</option>
+                <option value=0>Default Background</option>
+                <option value=1>Solid color</option>
+                <option value=2>Custom Image</option>
+            </select>
+
+            <div class="form-group hidden"  id="solidColorSelector">
+                <br>
+                <h5><label class="form-label" for="solidColor">Choose a custom color</label></h5>
+                <input type="color" class="form-control form-control-color" value="#c746e0" id="solidColor" name="solidColor"/>
+            </div>
+
+            <div class="form-group hidden" id="customImageSelector">
+                <br>
+                <h5><label class="form-label" for="bg">Choose a custom wallpaper</label></h5>
+                <input type="file" id="bg" name="bg" accept="image/*"/>
+            </div>
+
+
+        </form>
+    </div>
+
+    <button type="submit" class = "btn btn-primary">Submit</button>
+
+{% endblock %}
+
+{% block script_block %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/colap.js') }}"></script>
+{% endblock %}
