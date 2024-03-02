@@ -12,3 +12,4 @@ My Books is a web application built upon Flask, designed to provide users with a
 
 - **Online Book Modification**: My Books enables users to modify their books directly within the application. Users can highlight important passages, write notes on PDFs, add comments, and more, enhancing their reading experience and facilitating active engagement with the content.
   
+(The project was originally conducted on 2020 as one of my first projects)
